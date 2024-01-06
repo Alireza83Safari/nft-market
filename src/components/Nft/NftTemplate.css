@@ -1,0 +1,31 @@
+.product::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background: #242435;
+  position: absolute;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.product::before {
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  right: 0;
+  border-radius: 15px;
+  background-image: linear-gradient(green, red);
+  background-repeat: repeat-x;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.product:hover::before {
+  transform: rotate(-5deg) translateX(7px) translateY(11px);
+}
