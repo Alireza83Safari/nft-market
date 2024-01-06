@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Banner from "./components/Banner";
 import Suggestion from "./components/Suggestion";
 import SaleGuide from "./components/SaleGuide/SaleGuide";
+import Newest from "./components/Newest";
 
 export default async function page() {
   return (
@@ -12,6 +13,7 @@ export default async function page() {
         <Banner />
         <Suggestion />
         <SaleGuide />
+        <Newest />
       </main>
       <Footer />
     </div>
