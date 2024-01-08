@@ -4,6 +4,7 @@ import Banner from "./components/Banner";
 import Suggestion from "./components/Suggestion";
 import SaleGuide from "./components/SaleGuide/SaleGuide";
 import Newest from "./components/Newest";
+import Topsell from "./components/TopSell";
 
 export default async function page() {
   return (
@@ -14,6 +15,7 @@ export default async function page() {
         <Suggestion />
         <SaleGuide />
         <Newest />
+        <Topsell />
       </main>
       <Footer />
     </div>
