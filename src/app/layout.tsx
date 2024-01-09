@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/utils/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const vazir = Vazirmatn({ subsets: ["latin", "arabic"] });
 
@@ -16,8 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.className} bg-backgroundBlack `}>
-        {children}
+      <body className={`${vazir.className} bg-backgroundBlack xl:container mx-auto `}>
+        <AuthProvider>{children}</AuthProvider>
+        <Toaster />
       </body>
     </html>
   );

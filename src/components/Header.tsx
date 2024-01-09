@@ -3,16 +3,20 @@ import {
   FaAngleDown,
   FaHamburger,
   FaSearch,
+  FaSignInAlt,
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useState } from "react";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { data: session } = useSession();
 
   return (
-    <header className="xl:container mx-auto md:px-8 px-2 z-10 border-b border-borderColor min-w-full">
+    <header className="xl:container mx-auto md:px-8 px-2 z-20 border-b border-borderColor min-w-full sticky top-0 backdrop-blur-2xl">
       <div className="flex justify-between h-[90px] items-center text-gray-200">
         <div className="items-center md:flex hidden">
           <Image
@@ -108,15 +112,31 @@ const Header = () => {
             </button>
 
             <button
-              className="rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10 flex justify-center items-center"
+              className={`rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10  justify-center items-center ${
+                session ? `flex` : `hidden`
+              }`}
               onClick={() => setShowMenu(true)}
             >
               <FaHamburger className="text-xl" />
             </button>
 
-            <button className="rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10 flex justify-center items-center">
+            <button
+              className={`rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10  justify-center items-center ${
+                session ? `flex` : `hidden`
+              }`}
+              onClick={() => signOut()}
+            >
               <FaSignOutAlt className="text-xl" />
             </button>
+
+            <Link
+              href="/login"
+              className={`rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10  justify-center items-center ${
+                session ? `hidden` : `flex`
+              }`}
+            >
+              <FaSignInAlt className="text-xl" />
+            </Link>
           </div>
         </div>
       </div>

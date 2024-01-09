@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <nav className="grid md:grid-cols-5 bg-backgroundBlack md:py-20 py-5">
+    <nav className="grid md:grid-cols-5 bg-backgroundBlack md:py-20 py-5 mt-14">
       <div className="md:px-5 leading-10 md:col-span-2">
         <h1
           className="md:text-5xl text-4xl font-black text-white"
