@@ -10,8 +10,8 @@ export async function POST(req: NextRequest) {
     const { email, password } = await req.json();
     const validationResult = await loginValidator({ email, password });
 
-    if (validationResult?.length) {
-      return NextResponse.json({ error: validationResult }, { status: 422 });
+    if (!validationResult) {
+      return NextResponse.json({ error: validationResult }, { status: 400 });
     }
 
     const foundUser = await User.findOne({ email });

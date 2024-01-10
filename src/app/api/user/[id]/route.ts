@@ -1,7 +1,7 @@
 import User from "@/models/user";
 import connectToDB from "@/utils/db";
 import registerValidator from "@/validator/server/register";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -10,8 +10,8 @@ export async function GET(
 ) {
   try {
     await connectToDB();
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
-      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 422 });
+    if (!!isValidObjectId(params.id)) {
+      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
     }
 
     const foundUser = await User.findById(params.id, "-__v -password");
@@ -36,8 +36,8 @@ export async function PUT(
     await connectToDB();
     const data = await req.json();
 
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
-      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 422 });
+    if (isValidObjectId(params.id)) {
+      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
     }
 
     const validationResult = registerValidator(data);
@@ -69,8 +69,8 @@ export async function DELETE(
   try {
     await connectToDB();
 
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
-      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 422 });
+    if (isValidObjectId(params.id)) {
+      return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
     }
 
     const deleteUser = await User.findByIdAndDelete(params.id);

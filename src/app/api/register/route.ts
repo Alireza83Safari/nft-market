@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
 
     const validatorResult = registerValidator(data);
 
-    if (validatorResult) {
+    if (validatorResult !==) {
       NextResponse.json({ error: validatorResult }, { status: 422 });
     }
 
