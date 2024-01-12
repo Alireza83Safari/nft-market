@@ -45,8 +45,9 @@ export async function GET(req: NextRequest) {
 
     const q = searchParams.get("q");
     const filterExpensive = searchParams.get("expensive");
-    const page = parseInt(searchParams.get("page") || "1", 10); // Default to page 1 if not provided
-    const limit = parseInt(searchParams.get("limit") || "10", 10); // Default to limit 10 if not provided
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "10", 10);
+    const newNftCreated = searchParams.get("new");
 
     let nftQuery;
 
@@ -70,6 +71,20 @@ export async function GET(req: NextRequest) {
       case filterExpensive === "false":
         nftQuery = await Nft.find({}, "-__v")
           .sort({ price: 1 })
+          .skip(skip)
+          .limit(limit);
+        break;
+
+      case newNftCreated === "true":
+        nftQuery = await Nft.find({}, "-__v")
+          .sort({ updatedAt: -1 })
+          .skip(skip)
+          .limit(limit);
+        break;
+
+      case newNftCreated === "trfalseue":
+        nftQuery = await Nft.find({}, "-__v")
+          .sort({ updatedAt: 1 })
           .skip(skip)
           .limit(limit);
         break;

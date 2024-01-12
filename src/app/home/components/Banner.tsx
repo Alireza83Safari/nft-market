@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -15,12 +16,15 @@ const Banner = () => {
           نمایش بگذارید محصولات.
         </p>
         <div className="sm:gap-x-6 sm:flex grid justify-center">
-          <button className="text-white bg-blue hover:bg-blueAlta duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3">
+          <Link href='/nft' className="text-white bg-blue hover:bg-blueAlta duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3 text-center">
             شروع به کار
-          </button>
-          <button className="text-white bg-blueAlta hover:bg-blue duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3">
+          </Link>
+          <Link
+            href="/create-nft"
+            className="text-white bg-blueAlta hover:bg-blue duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3 text-center"
+          >
             ایجاد
-          </button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-center items-center md:px-16 md:mt-0 mt-10 md:col-span-3">

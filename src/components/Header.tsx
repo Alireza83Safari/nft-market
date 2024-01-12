@@ -52,7 +52,7 @@ const Header = () => {
             </Link>
 
             <Link
-              href="/contact-us"
+              href="/contact"
               className="flex xl:mx-5 mx-2 hover:text-blue duration-300"
             >
               ارتباط با ما
@@ -104,15 +104,15 @@ const Header = () => {
 
             <Link
               href="/create-nft"
-              className="rounded-full text-white hover:bg-gray-200 duration-300 bg-blue sm:w-12 w-10 sm:h-12 h-10 justify-center items-center flex"
+              className="rounded-full text-white hover:bg-gray-200 duration-300 bg-blue sm:w-12 w-8 sm:h-12 h-6 justify-center items-center lg:flex hidden"
               onClick={() => setShowMenu(true)}
             >
-              <FaPlus className="text-xl" />
+              <FaPlus className="sm:text-xl" />
             </Link>
 
             <button
               className={`rounded-full border border-borderColor sm:w-12 w-10 sm:h-12 h-10  justify-center items-center ${
-                session ? `flex` : `hidden`
+                session ? `lg:flex hidden` : `hidden`
               }`}
               onClick={() => signOut()}
             >
@@ -154,7 +154,7 @@ const Header = () => {
                 درباره ما
               </Link>
               <Link
-                href="/contact-us"
+                href="/contact"
                 className=" pb-5 text-center border-b border-borderColor hover:text-blue duration-300"
               >
                 ارتباط با ما
@@ -172,6 +172,12 @@ const Header = () => {
               >
                 وبلاگ
               </Link>
+              <button
+                className=" pb-5 text-center border-b border-borderColor hover:text-blue duration-300"
+                onClick={() => signOut()}
+              >
+                خروج
+              </button>
             </div>
           </div>
         </div>

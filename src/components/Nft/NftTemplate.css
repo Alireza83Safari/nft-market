@@ -27,5 +27,5 @@
 }
 
 .product:hover::before {
-  transform: rotate(-5deg) translateX(7px) translateY(11px);
+  transform: rotate(-3deg) translateX(7px) translateY(11px);
 }

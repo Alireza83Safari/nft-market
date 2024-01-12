@@ -1,31 +1,38 @@
 import Image from "next/image";
 import React from "react";
 import "./NftTemplate.css";
+import { NftType } from "@/types/nft.type";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-const NftTemplate = () => {
+const NftTemplate = ({ _id, title, price, image, createdAt }: NftType) => {
   return (
-    <div
-      className="h-[26rem] relative w-auto mx-4 text-white z-20 product rounded-lg"
+    <Link
+      href={`/nft/${_id}`}
+      className="h-[26rem] relative w-auto mx-4 text-white product rounded-lg mt-5"
       data-aos="fade-up"
     >
       <div className="max-h-[17rem]">
         <Image
-          src="https://res.cloudinary.com/dmywzd0yw/image/upload/v1704535121/portfolio-10_k2phbj.jpg"
-          alt="Portfolio Image"
-          className="w-full h-full max-h-[17rem]"
-          width={200}
-          height={200}
+          src={image}
+          alt="Image"
+          className="w-full h-full max-h-[17rem] rounded-t-lg"
+          width={400}
+          height={400}
         />
       </div>
       <div className="h-[12rem] px-5 mt-3">
-        <p className="text-xl font-black">دلتا25</p>
-        <p className="my-4">بالاترین پیشنهاد</p>
-        <div className="flex justify-between">
-          <p className="text-blue font-black">0.34eth</p>
-          <p>205</p>
+        <p className="text-xl font-black text-center">{title}</p>
+        <div className="flex justify-between mt-4">
+          <p className="text-sm">قیمت پیشنهادی سازنده:</p>
+          <p className="text-blue font-black">${price}</p>
+        </div>
+        <div className="flex justify-between mt-4">
+          <p className="text-sm">تاریخ ساخت:</p>
+          <p className="text-blue font-black">{createdAt?.slice(0, 10)}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

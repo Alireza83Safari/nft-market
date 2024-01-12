@@ -3,6 +3,7 @@ import connectToDB from "@/utils/db";
 import nftValidator from "@/validator/server/nft";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+import Proposal from "@/models/proposal";
 
 export async function GET(
   req: NextRequest,
@@ -18,8 +19,15 @@ export async function GET(
     }
 
     const nfts = await Nft.findOne({ _id: params.id }, "-__v")
-      .populate("proposals", "-__v")
-      .lean();
+    .populate("proposals")
+    .lean()
+    .exec();
+
+    
+    if (!nfts) {
+      return NextResponse.json({ message: "یافت نشد" }, { status: 404 });
+    }
+
     return NextResponse.json(nfts, { status: 200 });
   } catch (error) {
     return NextResponse.json(

@@ -3,10 +3,11 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { CldUploadButton } from "next-cloudinary";
+import { getRevalidateTag } from "@/actions/getRevalidateTag";
 
 export default function ImageUpload({ id }: { id: string }) {
   const { push } = useRouter();
-  
+
   const handleUpload = useCallback(async (result: any) => {
     const data = {
       image: result?.info?.secure_url,
@@ -19,6 +20,7 @@ export default function ImageUpload({ id }: { id: string }) {
 
       if (response?.status === 200) {
         toast.success("آپلود عکس با موفقیت انجام شد");
+        getRevalidateTag("nfts");
         push("/home");
       }
     }

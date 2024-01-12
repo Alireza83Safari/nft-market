@@ -11,9 +11,8 @@ const proposalSchema = new mongoose.Schema(
       ref: "Nft",
       required: true,
     },
-    userId: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
+    user: {
+      type: String,
       required: true,
     },
   },

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="md:flex justify-between grid grid-cols-2 mt-20 px-3 py-12 border-t border-borderColor">
+    <footer className="md:flex justify-between grid grid-cols-2 mt-10 px-3 py-12 border-t border-borderColor">
       <div className="max-w-[12rem] md:mx-0 mx-auto">
         <Image
           src="https://res.cloudinary.com/dmywzd0yw/image/upload/v1704525608/logo-white_dstkvu.png"

@@ -6,6 +6,7 @@ const nftSchema = {
   title: { type: "string", required: true },
   price: { type: "number", required: true },
   author: { type: "string", required: true },
+  description: { type: "string", required: true },
   image: { type: "string" },
 };
 

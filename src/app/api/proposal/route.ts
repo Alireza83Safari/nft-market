@@ -15,13 +15,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: validatorResult }, { status: 422 });
     }
 
-    if (!isValidObjectId(data.userId)) {
-      return NextResponse.json(
-        { message: "شناسه کاربر معتبر نیست" },
-        { status: 400 }
-      );
-    }
-
     if (!isValidObjectId(data.nft)) {
       return NextResponse.json(
         { message: "شناسه nft معتبر نیست" },

@@ -25,9 +25,9 @@ const Input = ({
 }: inputProps) => {
   return (
     <>
-      <label className="bolck text-sm mb-2 px-1">{label}</label>
+      <label className="bolck text-sm mb-2 px-1 text-gray-200">{label}</label>
       <input
-        className={`w-full py-2 bg-[#242435] border-2 border-borderColor rounded-lg px-3 focus:border-blue outline-0 ${className}`}
+        className={`w-full py-2 bg-[#242435] text-white border-2 border-borderColor rounded-lg px-3 focus:border-blue outline-0 ${className}`}
         type={type ? type : "text"}
         name={name}
         onChange={onChange}

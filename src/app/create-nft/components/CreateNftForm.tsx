@@ -4,7 +4,7 @@ import React from "react";
 import Input from "@/components/Input";
 import toast from "react-hot-toast";
 import ImageUpload from "./UploadImage";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
 import { createNft } from "@/actions/actions";
 
@@ -27,9 +27,6 @@ export default function CreateNftForm() {
       }
     }
   }, [state]);
-
-  const { pending } = useFormStatus();
-  console.log(pending);
 
   return (
     <div className="sm:px-5 px-1 min-h-screen xl:container mx-auto">

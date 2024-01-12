@@ -6,7 +6,7 @@ import "swiper/css/bundle";
 
 const SaleGuide = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-24">
       <p className="text-3xl font-bold text-white mb-10">
         NFT های خود را ایجاد و بفروشید
       </p>
