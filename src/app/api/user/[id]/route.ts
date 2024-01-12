@@ -1,7 +1,7 @@
 import User from "@/models/user";
 import connectToDB from "@/utils/db";
 import registerValidator from "@/validator/server/register";
-import mongoose, { isValidObjectId } from "mongoose";
+import  { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -10,7 +10,7 @@ export async function GET(
 ) {
   try {
     await connectToDB();
-    if (!!isValidObjectId(params.id)) {
+    if (!isValidObjectId(params.id)) {
       return NextResponse.json({ error: "شناسه معتبر نیست" }, { status: 400 });
     }
 
