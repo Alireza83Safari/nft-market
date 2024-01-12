@@ -29,10 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { message: "ساخت nft موفقیت آمیز بود" },
-      { status: 201 }
-    );
+    return NextResponse.json({ message: createNft?._id }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { error: "خطا در پردازش درخواست" },
@@ -41,11 +38,48 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     await connectToDB();
-    const nfts = await Nft.find({});
-    return NextResponse.json(nfts);
+    const { searchParams } = new URL(req.url);
+
+    const q = searchParams.get("q");
+    const filterExpensive = searchParams.get("expensive");
+    const page = parseInt(searchParams.get("page") || "1", 10); // Default to page 1 if not provided
+    const limit = parseInt(searchParams.get("limit") || "10", 10); // Default to limit 10 if not provided
+
+    let nftQuery;
+
+    const skip = (page - 1) * limit;
+    const total = await (await Nft.find({})).length;
+
+    switch (true) {
+      case !!q:
+        nftQuery = await Nft.find({ title: { $regex: q } }, "-__v")
+          .skip(skip)
+          .limit(limit);
+        break;
+
+      case filterExpensive === "true":
+        nftQuery = await Nft.find({}, "-__v")
+          .sort({ price: filterExpensive === "true" ? -1 : 1 })
+          .skip(skip)
+          .limit(limit);
+        break;
+
+      case filterExpensive === "false":
+        nftQuery = await Nft.find({}, "-__v")
+          .sort({ price: 1 })
+          .skip(skip)
+          .limit(limit);
+        break;
+
+      default:
+        nftQuery = await Nft.find({}, "-__v").skip(skip).limit(limit);
+        break;
+    }
+
+    return NextResponse.json({ data: nftQuery, total, page, limit });
   } catch (error) {
     return NextResponse.json(
       { error: "خطا در پردازش درخواست" },
