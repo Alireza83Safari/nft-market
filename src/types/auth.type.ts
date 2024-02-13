@@ -18,3 +18,13 @@ export interface RegisterType {
 export interface RegisterErrorType extends RegisterType {
   message: string;
 }
+
+export interface UserType {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -3,7 +3,6 @@ import React from "react";
 import "./NftTemplate.css";
 import { NftType } from "@/types/nft.type";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const NftTemplate = ({ _id, title, price, image, createdAt }: NftType) => {
   return (

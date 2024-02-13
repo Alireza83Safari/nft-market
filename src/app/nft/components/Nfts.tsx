@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Header, Footer, NftTemplate, Pagination } from "@/components";
 
-const Cars = (props: any) => {
+const Nfts = (props: any) => {
   const { cars, total } = props;
 
   const [showFilterMenu, setShowFilterMenu] = useState(false);
@@ -54,4 +54,4 @@ const Cars = (props: any) => {
   );
 };
 
-export default Cars;
+export default Nfts;

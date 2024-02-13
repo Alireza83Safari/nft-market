@@ -10,6 +10,8 @@ export interface NftProposalType {
   price: number;
   nft: string;
   user: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface NftType {
@@ -21,7 +23,6 @@ export interface NftType {
   description: string;
   createdAt: string;
   updatedAt: string;
-  proposals: NftProposalType[];
 }
 
 export interface NftWithPaginationType {

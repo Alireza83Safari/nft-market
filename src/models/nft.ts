@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Proposal from "./proposal";
 
 const nftSchema = new mongoose.Schema(
   {
@@ -13,12 +14,12 @@ const nftSchema = new mongoose.Schema(
   }
 );
 
-nftSchema.virtual("proposals", {
+/* nftSchema.virtual("proposals", {
   ref: "Proposal",
   localField: "_id",
   foreignField: "nft",
 });
-
+ */
 const Nft = mongoose.models?.Nft || mongoose.model("Nft", nftSchema);
 
 export default Nft;
