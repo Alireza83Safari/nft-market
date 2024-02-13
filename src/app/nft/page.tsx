@@ -1,36 +1,38 @@
 import getNfts from "@/actions/getNfts";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import NftTemplate from "@/components/Nft/NftTemplate";
-import Pagination from "@/components/Pagination";
+import { Header, Footer, NftTemplate, Pagination } from "@/components";
+import Nft from "@/models/nft";
 import { NftType } from "@/types/nft.type";
 
 export const dynamic = "force-dynamic";
 
 async function getNftsWithQuery(searchParams: any) {
   const q = searchParams.searchParams.q;
-  const page = searchParams.searchParams.page;
-  const limit = searchParams.searchParams.limit;
+
+  let countQuery: any = {};
+
+  if (q) countQuery.q = q;
 
   let url = ``;
+ // const totalCount = await Nft.countDocuments(countQuery);
+ // console.log(totalCount);
 
   switch (true) {
     case !!q:
-      url += `q=${q}&`;
-    case !!page:
-      url += `page=${page}&`;
-    case !!limit:
-      url += `limit=${limit}&`;
+    //    url += `q=${q}&`;
+    //case !!page:
+    ////   url += `page=${page}&`;
+    //// case !!limit:
+    ///url += `limit=${limit}&`;
   }
   const nfts = await getNfts(url ? `?${url}` : ``);
+  console.log(nfts);
+
   return nfts;
 }
 
 export default async function page(searchParams: any) {
   const nfts = await getNftsWithQuery(searchParams);
-  const limit = searchParams.searchParams.limit;
-  const page = searchParams.searchParams.page;
-  const totalPages = Math.ceil(nfts?.total / limit);
+ // const limit = searchParams.searchParams.limit;
 
   return (
     <>
@@ -44,13 +46,6 @@ export default async function page(searchParams: any) {
           </div>
         )}
       </div>
-
-      <Pagination
-        currentPage={page | 1}
-        totalPages={totalPages}
-        basePath={"nft"}
-        limit={1}
-      />
 
       <Footer />
     </>

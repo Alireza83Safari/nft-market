@@ -1,46 +1,54 @@
 "use client";
-
 import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  basePath: string;
-  limit: number;
+  onPageChange: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
-  basePath,
-  limit,
+  onPageChange,
 }) => {
-  const { push } = useRouter();
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
-    if (isMounted) {
-      push(`${basePath}?page=${1}&limit=${12}`);
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    const maxPages = 6;
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxPages / 2));
+    let endPage = Math.min(startPage + maxPages - 1, totalPages);
+
+    if (totalPages <= maxPages) {
+      startPage = 1;
+      endPage = totalPages;
+    } else if (currentPage <= Math.floor(maxPages / 2)) {
+      endPage = maxPages;
+    } else if (currentPage + Math.floor(maxPages / 2) >= totalPages) {
+      startPage = totalPages - maxPages + 1;
     }
-    setIsMounted(true);
-  }, [isMounted]);
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          className={`px-3 py-1 mx-1 border ${
+            currentPage === i ? "bg-purple text-white" : "border-purple"
+          }`}
+          onClick={() => onPageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    return pageNumbers;
+  };
 
   return (
-    <div className="flex justify-center mt-16">
-      {Array.from({ length: totalPages }).map((_, index) => (
-        <Link key={index} href={`${basePath}?page=${index + 1}&limit=${limit}`}>
-          <p
-            className={`p-2 w-10 h-10 flex justify-center items-center font-bold mx-2 ${
-              +currentPage === index + 1
-                ? "bg-blue text-white"
-                : "bg-gray-200 hover:bg-gray-300"
-            } rounded-md`}
-          >
-            {index + 1}
-          </p>
-        </Link>
-      ))}
+    <div className="flex items-center justify-center mt-4 min-w-screen">
+      {renderPageNumbers()}
     </div>
   );
 };

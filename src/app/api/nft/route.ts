@@ -82,7 +82,7 @@ export async function GET(req: NextRequest) {
           .limit(limit);
         break;
 
-      case newNftCreated === "trfalseue":
+      case newNftCreated === "false":
         nftQuery = await Nft.find({}, "-__v")
           .sort({ updatedAt: 1 })
           .skip(skip)

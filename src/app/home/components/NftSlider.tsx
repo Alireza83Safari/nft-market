@@ -5,6 +5,7 @@ import NftTemplate from "@/components/Nft/NftTemplate";
 import AOS from "aos";
 import "swiper/css";
 import "swiper/css/bundle";
+
 import "aos/dist/aos.css";
 import { NftWithPaginationType } from "@/types/nft.type";
 
