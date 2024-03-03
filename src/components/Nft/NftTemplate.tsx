@@ -13,11 +13,11 @@ const NftTemplate = ({ _id, title, price, image, createdAt }: NftType) => {
     >
       <div className="max-h-[17rem]">
         <Image
-          src={image}
-          alt="Image"
+          width="600"
+          height="600"
           className="w-full h-full max-h-[17rem] rounded-t-lg"
-          width={400}
-          height={400}
+          src={image}
+          alt={title}
         />
       </div>
       <div className="h-[12rem] px-5 mt-3">

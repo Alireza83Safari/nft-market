@@ -1,4 +1,5 @@
 import Proposal from "@/models/proposal";
+import User from "@/models/user";
 import connectToDB from "@/utils/db";
 import proposalValidator from "@/validator/server/proposal";
 import { isValidObjectId } from "mongoose";
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     await connectToDB();
-    const proposals = await Proposal.find({}, "-__v");
+    const proposals = await Proposal.find({}, "-__v")
     return NextResponse.json(proposals);
   } catch (error) {
     return NextResponse.json(

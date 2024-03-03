@@ -7,17 +7,17 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     await connectToDB();
-    const { email, password } = await req.json();
-    const validationResult = await loginValidator({ email, password });
+    const { username, password } = await req.json();
+    const validationResult = await loginValidator({ username, password });
 
     if (!validationResult) {
       return NextResponse.json({ error: validationResult }, { status: 400 });
     }
 
-    const foundUser = await User.findOne({ email });
+    const foundUser = await User.findOne({ username });
 
     if (!foundUser) {
-      return NextResponse.json({ message: "ایمیل یافت نشد" }, { status: 404 });
+      return NextResponse.json({ message: "کاربر یافت نشد" }, { status: 404 });
     }
 
     const isPasswordCorrect = await bcrypt.compare(

@@ -1,7 +1,9 @@
+import { UserType } from "./auth.type";
+
 export interface CreateNftType {
   title: string;
   price: number;
-  author: string;
+  user: string;
   image: string;
 }
 
@@ -9,7 +11,7 @@ export interface NftProposalType {
   _id: string;
   price: number;
   nft: string;
-  user: string;
+  user: UserType;
   createdAt: string;
   updatedAt: string;
 }
@@ -18,7 +20,7 @@ export interface NftType {
   _id: string;
   title: string;
   price: number;
-  author: string;
+  user: UserType;
   image: string;
   description: string;
   createdAt: string;

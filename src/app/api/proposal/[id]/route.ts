@@ -18,7 +18,10 @@ export async function GET(
       );
     }
 
-    const foundProposal = await Proposal.findOne({ _id: params.id }, "-__v");
+    const foundProposal = await Proposal.find({ nft: params.id }, "-__v")
+      .populate("user")
+      .lean()
+      .exec();
     if (!foundProposal) {
       return NextResponse.json(
         { message: "پیشنهادی یافت نشد" },

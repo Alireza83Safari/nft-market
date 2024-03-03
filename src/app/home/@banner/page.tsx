@@ -16,7 +16,10 @@ const Banner = () => {
           نمایش بگذارید محصولات.
         </p>
         <div className="sm:gap-x-6 sm:flex grid justify-center">
-          <Link href='/nft' className="text-white bg-blue hover:bg-blueAlta duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3 text-center">
+          <Link
+            href="/nft"
+            className="text-white bg-blue hover:bg-blueAlta duration-500 py-5 rounded-lg w-[190px] text-lg font-semibold sm:my-0 my-3 text-center"
+          >
             شروع به کار
           </Link>
           <Link
@@ -29,7 +32,7 @@ const Banner = () => {
       </div>
       <div className="flex justify-center items-center md:px-16 md:mt-0 mt-10 md:col-span-3">
         <Image
-          src="https://res.cloudinary.com/dmywzd0yw/image/upload/v1704529912/slider-1_scszon.png"
+          src="/image/slider-1.WEBP"
           alt="slider"
           className="object-contain 2xl:w-[40rem] w-[30rem]"
           width={1000}

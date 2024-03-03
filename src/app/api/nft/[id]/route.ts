@@ -1,4 +1,5 @@
 import Nft from "@/models/nft";
+import Proposal from "@/models/proposal";
 import connectToDB from "@/utils/db";
 import nftValidator from "@/validator/server/nft";
 import { isValidObjectId } from "mongoose";
@@ -10,6 +11,7 @@ export async function GET(
 ) {
   try {
     await connectToDB();
+    await Proposal.find({});
     if (!isValidObjectId(params.id)) {
       return NextResponse.json(
         { message: "شناسه معتبر نیست" },
@@ -17,7 +19,10 @@ export async function GET(
       );
     }
 
-    const nfts = await Nft.findOne({ _id: params.id }, "-__v").lean().exec();
+    const nfts = await Nft.findOne({ _id: params.id }, "-__v")
+      .populate("user")
+      .lean()
+      .exec();
 
     if (!nfts) {
       return NextResponse.json({ message: "یافت نشد" }, { status: 404 });

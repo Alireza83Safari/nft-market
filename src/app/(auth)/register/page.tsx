@@ -9,13 +9,12 @@ import Footer from "@/components/Footer";
 import Input from "@/components/Input";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import Spinner from "@/components/Spinner/Spinner";
 import FormSpinner from "@/components/FormSpinner/FormSpinner";
 
 const initialState = {
   firstname: "",
   lastname: "",
-  email: "",
+  username: "",
   password: "",
 };
 
@@ -114,11 +113,11 @@ export default function page() {
             </div>
             <div className="my-5">
               <Input
-                label="آدرس ایمیل"
-                name="email"
+                label="نام کاربری"
+                name="username"
                 onChange={setInputValue}
-                value={userInfos.email}
-                error={errors?.email}
+                value={userInfos.username}
+                error={errors?.username}
               />
             </div>
             <div className="my-5">

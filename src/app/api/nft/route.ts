@@ -1,7 +1,45 @@
 import Nft from "@/models/nft";
+import Proposal from "@/models/proposal";
 import connectToDB from "@/utils/db";
 import nftValidator from "@/validator/server/nft";
 import { NextRequest, NextResponse } from "next/server";
+
+async function handleOrder(order: any, skip: number, limit: number) {
+  let NftQuery;
+  switch (order) {
+    case "expensive":
+      NftQuery = await Nft.find({}, "-__v")
+        .sort({ price: -1 })
+        .skip(skip)
+        .limit(limit);
+      break;
+    case "cheap":
+      NftQuery = await Nft.find({}, "-__v")
+        .sort({ price: 1 })
+        .skip(skip)
+        .limit(limit);
+      break;
+    case "newset":
+      NftQuery = await Nft.find({}, "-__v")
+        .sort({ createdAt: 1 })
+        .skip(skip)
+        .limit(limit);
+      break;
+    case "oldest":
+      NftQuery = await Nft.find({}, "-__v")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+      break;
+
+    default:
+      return NextResponse.json(
+        { message: "Invalid order parameter" },
+        { status: 404 }
+      );
+  }
+  return NftQuery;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,7 +59,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const createNft = await Nft.create(data);
+    const createNft = await Nft.create({ ...data, isSell: false });
     if (!createNft) {
       return NextResponse.json(
         { message: "ساخت کاربر با خطا مواجه شد" },
@@ -42,12 +80,12 @@ export async function GET(req: NextRequest) {
   try {
     await connectToDB();
     const { searchParams } = new URL(req.url);
+    const proposal = await Proposal.find({});
 
     const q = searchParams.get("q");
-    const filterExpensive = searchParams.get("expensive");
+    const order = searchParams.get("order");
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = parseInt(searchParams.get("limit") || "10", 10);
-    const newNftCreated = searchParams.get("new");
 
     let nftQuery;
 
@@ -61,33 +99,9 @@ export async function GET(req: NextRequest) {
           .limit(limit);
         break;
 
-      case filterExpensive === "true":
-        nftQuery = await Nft.find({}, "-__v")
-          .sort({ price: filterExpensive === "true" ? -1 : 1 })
-          .skip(skip)
-          .limit(limit);
-        break;
-
-      case filterExpensive === "false":
-        nftQuery = await Nft.find({}, "-__v")
-          .sort({ price: 1 })
-          .skip(skip)
-          .limit(limit);
-        break;
-
-      case newNftCreated === "true":
-        nftQuery = await Nft.find({}, "-__v")
-          .sort({ updatedAt: -1 })
-          .skip(skip)
-          .limit(limit);
-        break;
-
-      case newNftCreated === "false":
-        nftQuery = await Nft.find({}, "-__v")
-          .sort({ updatedAt: 1 })
-          .skip(skip)
-          .limit(limit);
-        break;
+      case !!order:
+        nftQuery = await handleOrder(order, skip, limit);
+        return NextResponse.json(nftQuery);
 
       default:
         nftQuery = await Nft.find({}, "-__v").skip(skip).limit(limit);

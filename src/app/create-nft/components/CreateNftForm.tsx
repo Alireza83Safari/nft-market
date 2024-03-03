@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import ImageUpload from "./UploadImage";
 import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
-import { createNft } from "@/actions/actions";
+import { createNft } from "@/actions/createNft";
 
 export default function CreateNftForm() {
   const { data: session } = useSession();

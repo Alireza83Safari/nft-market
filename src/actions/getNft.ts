@@ -5,8 +5,7 @@ export default async function getNft(id: string) {
     const res = await fetch(`${apiUrl}api/nft/${id}`, {
       next: { tags: ["nft"] },
     });
-    const data = await res.json();
-
+    const data = await res?.json();
     return data;
   }
 }

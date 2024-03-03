@@ -1,0 +1,17 @@
+export const bestSelling = [
+  { id: 1, img: "/image/user/client-1.WEBP", user: "پینک فلوید", price: 25000 },
+  { id: 2, img: "/image/user/client-2.WEBP", user: "سارا", price: 25000 },
+  { id: 3, img: "/image/user/client-3.WEBP", user: "صدرا", price: 25000 },
+  { id: 4, img: "/image/user/client-4.WEBP", user: "جان ویلیامز", price: 25000 },
+  { id: 5, img: "/image/user/client-5.WEBP", user: "پریا", price: 25000 },
+  { id: 6, img: "/image/user/client-6.WEBP", user: "ماتلیکا", price: 25000 },
+  { id: 7, img: "/image/user/client-7.WEBP", user: "انریکه", price: 25000 },
+  { id: 8, img: "/image/user/client-8.WEBP", user: "مهتاب", price: 25000 },
+  { id: 9, img: "/image/user/client-9.WEBP", user: "آتوسا", price: 25000 },
+  { id: 10, img: "/image/user/client-10.WEBP", user: "کاکوبند", price: 25000 },
+  { id: 11, img: "/image/user/client-11.WEBP", user: "کیان", price: 25000 },
+  { id: 12, img: "/image/user/client-12.WEBP", user: "ملیکا", price: 25000 },
+  { id: 13, img: "/image/user/client-13.WEBP", user: "آیدا", price: 25000 },
+  { id: 14, img: "/image/user/client-14.WEBP", user: "آترین", price: 25000 },
+  { id: 15, img: "/image/user/client-15.WEBP", user: "فرشید", price: 25000 },
+];

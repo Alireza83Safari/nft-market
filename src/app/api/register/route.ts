@@ -12,11 +12,11 @@ export async function POST(req: NextRequest) {
 
     const validatorResult = registerValidator(data);
 
-    if (validatorResult !==) {
+    if (validatorResult) {
       NextResponse.json({ error: validatorResult }, { status: 422 });
     }
 
-    const isUserExist = await User.findOne({ email: data.email });
+    const isUserExist = await User.findOne({ username: data.username });
 
     if (isUserExist) {
       return NextResponse.json(

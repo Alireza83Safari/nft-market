@@ -13,13 +13,12 @@ import FormSpinner from "@/components/FormSpinner/FormSpinner";
 
 const initialState = {
   id: "",
-  email: "",
+  username: "",
   password: "",
 };
 
 export default function page() {
   const { data: session } = useSession();
-
   const { push } = useRouter();
 
   const [errors, setErrors] = useState<Partial<LoginErrorType>>({});
@@ -110,12 +109,12 @@ export default function page() {
             </p>
             <div className="my-9">
               <Input
-                label="آدرس ایمیل"
-                name="email"
+                label="نام کاربری"
+                name="username"
                 onChange={setInputValue}
-                value={userInfos.email}
+                value={userInfos.username}
                 onfocus={() => setErrors(initialState)}
-                error={errors?.email}
+                error={errors?.username}
               />
             </div>
             <div className="my-9">

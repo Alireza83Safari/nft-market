@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
-import Proposal from "./proposal";
 
 const nftSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, unique: true },
     price: { type: Number, required: true },
-    author: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
+    user: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
     description: { type: String, required: true },
     image: { type: String },
+    isSell: { type: Boolean },
   },
   {
     timestamps: true,
   }
 );
 
-/* nftSchema.virtual("proposals", {
+nftSchema.virtual("proposals", {
   ref: "Proposal",
   localField: "_id",
   foreignField: "nft",
 });
- */
+
 const Nft = mongoose.models?.Nft || mongoose.model("Nft", nftSchema);
 
 export default Nft;
