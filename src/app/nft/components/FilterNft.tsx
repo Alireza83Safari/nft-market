@@ -15,20 +15,16 @@ const FilterNft = () => {
   }, [filterValue]);
 
   return (
-    <div>
-      <div>
-        <select
-          className="px-10 outline-none bg-black text-white"
-          onChange={(e) => setFilterValue(e.target.value)}
-        >
-          <option value="">فیلتر بر اساس</option>
-          <option value="expensive">گران ترین</option>
-          <option value="cheap">ارزان ترین</option>
-          <option value="newset">جدیدترین</option>
-          <option value="oldest">قدیمی ترین</option>
-        </select>
-      </div>
-    </div>
+    <select
+      className="px-10 outline-none bg-black text-white cursor-pointer"
+      onChange={(e) => setFilterValue(e.target.value)}
+    >
+      <option value="">فیلتر بر اساس</option>
+      <option value="expensive">گران ترین</option>
+      <option value="cheap">ارزان ترین</option>
+      <option value="newset">جدیدترین</option>
+      <option value="oldest">قدیمی ترین</option>
+    </select>
   );
 };
 

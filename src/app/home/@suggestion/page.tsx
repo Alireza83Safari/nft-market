@@ -3,12 +3,16 @@ import getNfts from "@/actions/getNfts";
 import { NftTemplate } from "@/components";
 import { NftType } from "@/types/nft.type";
 
-function shuffleArray<T>(array: T[]): T[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+export const revalidate = 60 * 60;
+
+function shuffleArray<T>(array: T[]): any {
+  if (array?.length) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
-  return array;
 }
 
 export default async function Page(): Promise<ReactElement> {

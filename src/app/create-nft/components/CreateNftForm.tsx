@@ -7,6 +7,7 @@ import ImageUpload from "./UploadImage";
 import { useFormState } from "react-dom";
 import { useSession } from "next-auth/react";
 import { createNft } from "@/actions/createNft";
+import { getRevalidateTag } from "@/actions/getRevalidateTag";
 
 export default function CreateNftForm() {
   const { data: session } = useSession();
@@ -23,6 +24,7 @@ export default function CreateNftForm() {
         toast.error(state.message);
       } else {
         setShowUpload(true);
+        getRevalidateTag("nfts");
         toast.success("ان اف تی با موفقیت ساخته شد");
       }
     }
@@ -53,10 +55,10 @@ export default function CreateNftForm() {
           </div>
 
           <div className="mt-7">
-            <Input
-              label="شرح"
+            <label htmlFor="">شرح</label>
+            <textarea
+              className="w-full min-h-[8rem] p-3 bg-[#242435] text-white border-2 border-borderColor rounded-lg focus:border-blue outline-0"
               placeholder="به عنوان مثال، `پس از خرید محصول، می توانید مورد را دریافت کنید...`"
-              className="py-7"
               name="description"
             />
           </div>
