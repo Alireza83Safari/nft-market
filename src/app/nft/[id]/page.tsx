@@ -8,12 +8,12 @@ import getProposal from "@/actions/getProposal";
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
+/* export async function generateStaticParams() {
   const nfts = await getNfts();
   return nfts?.data?.map((nft: NftType) => ({
     id: nft._id,
   }));
-}
+} */
 
 export default async function page({ params }: { params: { id: string } }) {
   const nft = await getNft(params?.id);
